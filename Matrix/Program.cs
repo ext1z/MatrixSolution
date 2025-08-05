@@ -110,12 +110,12 @@ List<int[]> FindDuplicateIndexes(int[,] arr)
         }
     }
 
-    var repeatingIndicesList = dict
+    var repeatingIndixesList = dict
         .Where(pair => pair.Value.Count >= 2)
         .SelectMany(pair => pair.Value)
         .ToList();
 
-    return repeatingIndicesList;
+    return repeatingIndixesList;
 }
 
 
