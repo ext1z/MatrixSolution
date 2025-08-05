@@ -3,10 +3,21 @@
 
 
 
-int[,] numbers = { { 3, 2, 1 }, { 6, 5, 4 }, {9, 8, 7} };
+
+int[,] numbers = { { 3, 2, 1 , 1, 2}, { 6, 5, 4 , 4, 1}, {9, 8, 7, 7, 10} };
+
+
+
+
+
+//var result = FindDuplicateIndexes(numbers);
+//foreach (var index in result)
+//    Console.WriteLine($"[Row : {index[0]}, Column : {index[1]}]");
+
+
+
 
 //var sortedArray = SortedArray(numbers);
-
 //var sumOfOddNumbers = TheSumOddNumbersOfArray(numbers);
 
 
@@ -81,6 +92,31 @@ int TheSumOddNumbersOfArray(int[,] arr)
 #region D) Matricada takrorlangan elementlar indexlarini massiv ko'rinishida chiqarish;
 
 
+List<int[]> FindDuplicateIndexes(int[,] arr)
+{
+    int rows = arr.GetLength(0);
+    int columns = arr.GetLength(1);
+    Dictionary<int, List<int[]>> dict = new();
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            int element = arr[i, j];
+            if (!dict.ContainsKey(element))
+                dict[element] = new List<int[]>();
+
+            dict[element].Add(new int[] { i, j });
+        }
+    }
+
+    var repeatingIndicesList = dict
+        .Where(pair => pair.Value.Count >= 2)
+        .SelectMany(pair => pair.Value)
+        .ToList();
+
+    return repeatingIndicesList;
+}
 
 
 
